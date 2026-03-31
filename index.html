@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DDHD Agency Chat</title>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" 
+        rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+  <script type="module">
+    import { createChat } from 
+    'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL_HERE',
+      initialMessages: [
+        'Welcome to DDHD Agency! 👋',
+        'I assist with aerospace & defense procurement and AI automation.',
+        'How can I help you today?'
+      ],
+      i18n: {
+        en: {
+          title: '🛡️ DDHD Agency',
+          subtitle: 'Aerospace & Defense AI Assistant',
+          inputPlaceholder: 'Ask about our services...',
+          getStarted: 'Start Conversation',
+        }
+
+      }
+    });
+  </script>
+</body>
+</html>
