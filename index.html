@@ -6,10 +6,6 @@
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
   <style>
     body { margin: 0; padding: 0; background: transparent; }
-    .chat-message-from-bot pre { 
-      white-space: pre-wrap; 
-      font-family: inherit;
-    }
   </style>
 </head>
 <body>
@@ -37,16 +33,3 @@
 </script>
 </body>
 </html>
-```
-
----
-
-## If That STILL Shows JSON
-
-Then the permanent fix is to add a **"Respond to Webhook"** node in n8n:
-
-1. In n8n, click the **+** after your AI Agent node
-2. Search for **"Respond to Webhook"**
-3. Set **"Response Body"** to:
-```
-{{ $('AI Agent').item.json.output }}
