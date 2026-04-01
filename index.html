@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>DDHD Chat</title>
-  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
-  <style>
-    body { margin: 0; padding: 0; background: transparent; }
-  </style>
-</head>
-<body>
 <script type="module">
   import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
   
   createChat({
-    webhookUrl: 'https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat',
+    webhookUrl: 'https://darintano.app.n8n.cloud/chat/faa253f5-b50b-47d9-ae18-3a4e8e0949b5',
     mode: 'window',
     showWelcomeScreen: false,
     initialMessages: [
@@ -31,5 +20,3 @@
     }
   });
 </script>
-</body>
-</html>
