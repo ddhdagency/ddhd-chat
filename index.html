@@ -4,184 +4,40 @@
   <meta charset="UTF-8">
   <title>DDHD Chat</title>
   <style>
-    body { margin: 0; padding: 0; background: transparent; }
-    
-    #bubble {
+    body { margin: 0; padding: 0; }
+    iframe {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background: #1a1a2e;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-      z-index: 1000;
-    }
-
-    #chat-box {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 350px;
-      height: 500px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 999;
-    }
-
-    #chat-box.open { display: flex; }
-
-    #chat-header {
-      background: #1a1a2e;
-      color: white;
-      padding: 16px;
-      text-align: center;
-    }
-    #chat-header h3 { margin: 0; font-size: 16px; }
-    #chat-header p { margin: 4px 0 0; font-size: 12px; opacity: 0.8; }
-
-    #messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .message {
-      max-width: 80%;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-    .bot { background: #f0f0f0; align-self: flex-start; }
-    .user {
-      background: #1a1a2e;
-      color: white;
-      align-self: flex-end;
-    }
-
-    #input-area {
-      display: flex;
-      padding: 12px;
-      border-top: 1px solid #eee;
-      gap: 8px;
-    }
-    #user-input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 13px;
-      outline: none;
-    }
-    #send-btn {
-      background: #1a1a2e;
-      color: white;
+      bottom: 0;
+      right: 0;
+      width: 400px;
+      height: 600px;
       border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
+      border-radius: 16px 0 0 0;
+      box-shadow: -4px -4px 24px rgba(0,0,0,0.2);
+      z-index: 9999;
     }
-    #send-btn:hover { background: #16213e; }
   </style>
 </head>
 <body>
-
-  <!-- Floating Bubble -->
-  <div id="bubble" onclick="toggleChat()">💬</div>
-
-  <!-- Chat Box -->
-  <div id="chat-box">
-    <div id="chat-header">
-      <h3>🛡️ DDHD Agency</h3>
-      <p>Aerospace & Defense AI Assistant</p>
-    </div>
-    <div id="messages">
-      <div class="message bot">Welcome to DDHD Agency! 👋</div>
-      <div class="message bot">I assist with aerospace & defense procurement.</div>
-      <div class="message bot">How can I help you today?</div>
-    </div>
-    <div id="input-area">
-      <input type="text" id="user-input"
-             placeholder="Ask about our services..."
-             onkeypress="if(event.key==='Enter') sendMessage()"/>
-      <button id="send-btn" onclick="sendMessage()">Send</button>
-    </div>
-  </div>
-
-  <script>
-    const webhookUrl = 'https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat';
-    const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
-
-    function toggleChat() {
-      const box = document.getElementById('chat-box');
-      box.classList.toggle('open');
-    }
-
-    function addMessage(text, type) {
-      const messages = document.getElementById('messages');
-      const div = document.createElement('div');
-      div.className = 'message ' + type;
-      div.textContent = text;
-      messages.appendChild(div);
-      messages.scrollTop = messages.scrollHeight;
-    }
-
-    async function sendMessage() {
-      const input = document.getElementById('user-input');
-      const text = input.value.trim();
-      if (!text) return;
-      input.value = '';
-      addMessage(text, 'user');
-      addMessage('Typing...', 'bot');
-
-      try {
-        const response = await fetch(webhookUrl, {
-          method: 'POST',
-          mode: 'cors',
-          headers: { 
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            action: 'sendMessage',
-            chatInput: text,
-            sessionId: sessionId
-          })
-        });
-
-        const data = await response.json();
-        
-        // Remove typing indicator
-        const messages = document.getElementById('messages');
-        messages.lastChild.remove();
-        
-        // Extract clean response
-        const reply = data.output || data.text || 
-                      data.message || data.response ||
-                      data[0]?.output ||
-                      'Thank you! Our team will follow up shortly.';
-        addMessage(reply, 'bot');
-
-      } catch (error) {
-        const messages = document.getElementById('messages');
-        messages.lastChild.remove();
-        addMessage('Connection error. Please try again.', 'bot');
-        console.error('Error:', error);
-      }
-    }
-  </script>
+  <iframe 
+    src="https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat"
+    allow="*">
+  </iframe>
 </body>
 </html>
+```
+
+Commit that, wait 2 minutes, test at:
+```
+https://ddhdagency.github.io/ddhd-chat/
+```
+
+---
+
+## If That Still Doesn't Work
+
+Honestly the cleanest solution for you right now is to just **use the n8n URL directly** as a button on your Google Site. It works perfectly, looks professional, and gets you leads immediately while we figure out the embed.
+
+Your working URL:
+```
+https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat
