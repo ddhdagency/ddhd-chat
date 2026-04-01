@@ -4,24 +4,42 @@
   <meta charset="UTF-8">
   <title>DDHD Chat</title>
   <style>
-    body { margin: 0; padding: 0; }
-    iframe {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 400px;
-      height: 600px;
-      border: none;
-      border-radius: 16px 0 0 0;
-      box-shadow: -4px -4px 24px rgba(0,0,0,0.2);
-      z-index: 9999;
-    }
+    body { margin: 0; padding: 0; background: transparent; }
   </style>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
 </head>
 <body>
-  <iframe 
-    src="https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat"
-    allow="*">
-  </iframe>
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat',
+      mode: 'window',
+      showWelcomeScreen: false,
+      defaultLanguage: 'en',
+      initialMessages: [
+        'Welcome to DDHD Agency! 👋',
+        'I assist with aerospace & defense procurement.',
+        'How can I help you today?'
+      ],
+      i18n: {
+        en: {
+          title: '🛡️ DDHD Agency',
+          subtitle: 'Aerospace & Defense AI Assistant',
+          inputPlaceholder: 'Ask about our services...',
+          getStarted: 'Start Conversation',
+          closeButtonTooltip: 'Close chat',
+        }
+      }
+    });
+  </script>
 </body>
 </html>
+```
+
+---
+
+## Step 3 — Embed in Google Sites
+
+Once committed and live at:
+```
+https://ddhdagency.github.io/ddhd-chat/
