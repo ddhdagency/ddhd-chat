@@ -2,11 +2,12 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DDHD Chat</title>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
   <style>
     body { margin: 0; padding: 0; background: transparent; }
   </style>
-  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
 </head>
 <body>
   <script type="module">
@@ -15,7 +16,6 @@
       webhookUrl: 'https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat',
       mode: 'window',
       showWelcomeScreen: false,
-      defaultLanguage: 'en',
       initialMessages: [
         'Welcome to DDHD Agency! 👋',
         'I assist with aerospace & defense procurement.',
@@ -27,19 +27,9 @@
           subtitle: 'Aerospace & Defense AI Assistant',
           inputPlaceholder: 'Ask about our services...',
           getStarted: 'Start Conversation',
-          closeButtonTooltip: 'Close chat',
         }
       }
     });
   </script>
 </body>
 </html>
-```
-
----
-
-## Step 3 — Embed in Google Sites
-
-Once committed and live at:
-```
-https://ddhdagency.github.io/ddhd-chat/
