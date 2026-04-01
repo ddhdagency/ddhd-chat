@@ -2,34 +2,51 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DDHD Chat</title>
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
   <style>
     body { margin: 0; padding: 0; background: transparent; }
+    .chat-message-from-bot pre { 
+      white-space: pre-wrap; 
+      font-family: inherit;
+    }
   </style>
 </head>
 <body>
-  <script type="module">
-    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-    createChat({
-      webhookUrl: 'https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat',
-      mode: 'window',
-      showWelcomeScreen: false,
-      initialMessages: [
-        'Welcome to DDHD Agency! 👋',
-        'I assist with aerospace & defense procurement.',
-        'How can I help you today?'
-      ],
-      i18n: {
-        en: {
-          title: '🛡️ DDHD Agency',
-          subtitle: 'Aerospace & Defense AI Assistant',
-          inputPlaceholder: 'Ask about our services...',
-          getStarted: 'Start Conversation',
-        }
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+  
+  createChat({
+    webhookUrl: 'https://darintano.app.n8n.cloud/webhook/faa253f5-b50b-47d9-ae18-3a4e8e0949b5/chat',
+    mode: 'window',
+    showWelcomeScreen: false,
+    initialMessages: [
+      'Welcome to DDHD Agency! 👋',
+      'I assist with aerospace & defense procurement.',
+      'How can I help you today?'
+    ],
+    i18n: {
+      en: {
+        title: '🛡️ DDHD Agency',
+        subtitle: 'Aerospace & Defense AI Assistant',
+        inputPlaceholder: 'Ask about our services...',
+        getStarted: 'Start Conversation',
       }
-    });
-  </script>
+    }
+  });
+</script>
 </body>
 </html>
+```
+
+---
+
+## If That STILL Shows JSON
+
+Then the permanent fix is to add a **"Respond to Webhook"** node in n8n:
+
+1. In n8n, click the **+** after your AI Agent node
+2. Search for **"Respond to Webhook"**
+3. Set **"Response Body"** to:
+```
+{{ $('AI Agent').item.json.output }}
